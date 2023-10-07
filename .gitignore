@@ -1,4 +1,7 @@
 misc/
-responses/
+scrape_responses/
 
 .idea/*
+*.csv
+
+__pycache__/*

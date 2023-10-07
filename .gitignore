@@ -1,7 +1,10 @@
 misc/
-scrape_responses/
-
+scrape_image/scrape_responses/
 .idea/*
 *.csv
+*.pyc
+*.pyo
+__pycache__/
 
-__pycache__/*
+**/.terraform/*
+**/.terraform.*

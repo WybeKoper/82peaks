@@ -73,7 +73,7 @@ def process_html_responses():
         data_all_mountains.to_csv("data_all_mountains.csv", index=False)
 
         # save data in s3 bucket
-        bucket = os.getenv("S3_BUCKET")
+        bucket = os.environ.get("S3_BUCKET")
         csv_buffer = StringIO()
         data_all_mountains.to_csv(csv_buffer, index=False)
         s3_resource = boto3.resource('s3')

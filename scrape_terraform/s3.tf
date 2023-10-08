@@ -5,5 +5,6 @@ resource "random_pet" "bucket_name" {
 
 
 resource "aws_s3_bucket" "peaks-data-bucket" {
-  bucket = "peaks-bucket-${random_pet.bucket_name.id}"
+  bucket        = "peaks-bucket-${random_pet.bucket_name.id}"
+  force_destroy = true
 }

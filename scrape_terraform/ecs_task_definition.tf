@@ -5,10 +5,11 @@ resource "aws_ecs_task_definition" "service" {
   cpu                      = 256
   memory                   = 512
   execution_role_arn       = aws_iam_role.s3_role.arn
+  task_role_arn            = aws_iam_role.s3_role.arn
   container_definitions = jsonencode([
     {
       name      = "peaks-scraper-image"
-      image     = "docker.io/9923/peakscraper:3"
+      image     = "docker.io/9923/peakscraper:4"
       cpu       = 256
       memory    = 512
       essential = true
@@ -21,6 +22,20 @@ resource "aws_ecs_task_definition" "service" {
           hostPort      = 80
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = aws_cloudwatch_log_group.ecs_logs.name
+          "awslogs-region"        = "eu-central-1",
+          "awslogs-stream-prefix" = "peaks-log-stream"
+        }
+      }
     },
   ])
 }
+
+resource "aws_cloudwatch_log_group" "ecs_logs" {
+  name              = "/ecs/my-app-logs"
+  retention_in_days = 1
+}
+

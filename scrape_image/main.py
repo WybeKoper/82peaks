@@ -4,7 +4,11 @@ from process_html import process_html_responses
 
 if __name__=="__main__":
 
-    scrape()
+    try:
+        scrape()
 
-    process_html_responses()
+        process_html_responses()
+    except Exception as e:
+        print(e)
+
 

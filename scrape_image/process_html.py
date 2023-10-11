@@ -70,13 +70,13 @@ def process_html_responses():
             data_all_mountains = pd.concat([data_all_mountains, df], ignore_index=True)
 
 
-        data_all_mountains.to_csv("data_all_mountains.csv", index=False)
+    data_all_mountains.to_csv("data_all_mountains.csv", index=False)
 
-        # save data in s3 bucket
-        bucket = os.environ.get("S3_BUCKET")
-        csv_buffer = StringIO()
-        data_all_mountains.to_csv(csv_buffer, index=False)
-        s3_resource = boto3.resource('s3')
-        s3_resource.Object(bucket, 'data_all_mountains.csv').put(Body=csv_buffer.getvalue())
+    # save data in s3 bucket
+    bucket = os.environ.get("S3_BUCKET")
+    csv_buffer = StringIO()
+    data_all_mountains.to_csv(csv_buffer, index=False)
+    s3_resource = boto3.resource('s3')
+    s3_resource.Object(bucket, 'data_all_mountains.csv').put(Body=csv_buffer.getvalue())
 
     print("processing complete")

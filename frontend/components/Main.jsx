@@ -8,28 +8,35 @@ import { AiFillInstagram } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import PersonalImg from '../public/assets/mountain_7.png';
 import Picker from './Picker';
+import CommentsPage from './Commentloader';
+import Home from './Commentloader';
+import PickDates from './PickDates';
 
 
 
 const Main = () => {
   return (
     <div id='home' className='w-full h-screen text-center'>
-      <div className='max-w-[1240px] pt-24 w-full h-full mx-auto p-2 justify-center items-center background-color: rgb(153, 153, 255)'>
+      <div className='max-w-[1240px] pt-24 w-full h-full mx-auto p-2 justify-center items-center'>
         <div>
-        <div className="relative mx-auto w-150 h-100 img-shape ">
-        <Image src={PersonalImg} className="img-shape background-color: rgb(153, 153, 255)"></Image>
+        <h1 className='py-4 text-2xl text-black font-bold'>
+            Find the 4000m alpine peak with the best weather forecast
+          </h1>
+        <div className="relative mx-auto w-100 h-100 img-shape ">
+        <Image src={PersonalImg} className="img-shape"></Image>
         </div>
         
         <div>
-          <h1 className='py-4 text-2xl text-black font-bold'>
-            Find the 4000m alpine peak with the best weather forecast
-          </h1>
-          <div className= "background-color: rgb(153, 153, 255">
-          <Picker className="light background-color: rgb(153, 153, 255"/>
+          <PickDates/>
+        </div>
+        {/* <div className='flex items-center justify-center'>
+          <div>
+            <Picker className="py-4"/>
           </div>
-          
+          <div className='pl-5'>
+          <CommentsPage className="py-4"/>
           </div>
-
+        </div> */}
         </div>
       </div>
 

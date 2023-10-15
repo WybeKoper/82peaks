@@ -56,13 +56,46 @@ const PickDates = () => {
           </button>
         </div>
       </div>
-      <div>
+      <div className="pt-5">
         {mountain.map((mont) => {
           return (
-            <div className="flex items-center justify-center">
-              <div className="p-1">{mont.mountain_name}</div>
-              <div className="p-1">
-                <a href={mont.url}>Detailed Forecast</a>
+            <div className="flex">
+              <div className="flex items-end">
+                <div className="text-sm">Wind km/h</div>
+              </div>
+              <div className="bg-slate-300 border-solid border-2 rounded border-gray-800">
+                <div className="flex items-center justify-center p-5">
+                  <div className="p-1 text-5xl">{mont.mountain_name}</div>
+                  <div className="p-1 pl-10 underline text-sky-600">
+                    <a href={mont.url} target="_blank">
+                      Detailed Forecast
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center border justify-center border-1 border-gray-400 divide-x-2 divide-gray-400">
+                  {mont.weather.map((single_day) => (
+                    <div className="">
+                      <div className="bg-slate-200">
+                        <div>{single_day.day_of_week} </div>
+                        <div>{single_day.date.split("-")[0]} </div>
+                      </div>
+                      <div className="flex items-center justify-center">
+                        {single_day.detailed_weather.map((time_period) => (
+                          <div>
+                            <div className="p-1 bg-slate-200">
+                              {time_period.time}
+                            </div>
+                            <img src={time_period.weather_icon} />
+                            <div className="p-1">
+                              {time_period.weather_description}
+                            </div>
+                            <div className="p-1">{time_period.wind}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           );

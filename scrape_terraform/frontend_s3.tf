@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "website_policy" {
       type        = "AWS"
     }
     resources = [
-        aws_s3_bucket.frontend_bucket.arn,
+      aws_s3_bucket.frontend_bucket.arn,
       "${aws_s3_bucket.frontend_bucket.arn}/*",
     ]
   }

@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "service" {
   container_definitions = jsonencode([
     {
       name      = "peaks-scraper-image"
-      image     = "docker.io/9923/peakscraper:7"
+      image     = "docker.io/9923/peakscraper:8"
       cpu       = 256
       memory    = 512
       essential = true

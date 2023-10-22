@@ -18,8 +18,11 @@ def process_html_responses():
         with open(dir_path + "/" + file_path, encoding="utf8") as jsonFile:
             data = json.load(jsonFile)
             elevations_list = list(data['elevations'].keys())
+            elevations_list = [int(x) for x in elevations_list]
             highest_elevation = max(elevations_list)
-            soup = BeautifulSoup(data['elevations'][highest_elevation]['period_types']['p']['table'], 'html.parser')
+            soup = BeautifulSoup(data['elevations'][str(highest_elevation)]['period_types']['p']['table'], 'html.parser')
+
+            mountain_url = f"https://mountain-forecast.com/peaks/{mountain_name}/forecasts/{highest_elevation}"
 
             dates = []
             # extract dates from the dates table
@@ -57,6 +60,12 @@ def process_html_responses():
                 final_text = [x for x in formated_text if x.strip() != ""]
                 weather = final_text
 
+            # get icons
+            weather_icon_urls = []
+            for weather_icon in soup.find_all(class_="forecast__table-weather"):
+                image = weather_icon.find_all('img')
+                weather_icon_urls = ["https://www.mountain-forecast.com" + url['src'] for url in image]
+
             # get wind value
             wind = []
             for val in soup.find_all(class_="forecast__table-wind-container"):
@@ -65,12 +74,13 @@ def process_html_responses():
                 wind.append(text_no_spaces)
 
             # construct dataframe
-            df = pd.DataFrame({"mountain_name": mountain_name, "datetime": date_times, "weather_description": weather, "wind":wind})
+            df = pd.DataFrame({"mountain_name": mountain_name, "datetime": date_times, "weather_description": weather, "weather_icon_urls": weather_icon_urls, "wind":wind, "url": mountain_url})
 
             data_all_mountains = pd.concat([data_all_mountains, df], ignore_index=True)
 
 
     data_all_mountains.to_csv("data_all_mountains.csv", index=False)
+
 
     # save data in s3 bucket
     bucket = os.environ.get("S3_BUCKET")
@@ -80,3 +90,4 @@ def process_html_responses():
     s3_resource.Object(bucket, 'data_all_mountains.csv').put(Body=csv_buffer.getvalue())
 
     print("processing complete")
+

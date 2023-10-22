@@ -53,6 +53,7 @@ resource "aws_lambda_function" "peaks_lambda" {
   handler       = "lambda_function.lambda_handler"
   runtime       = "python3.10"
   layers        = ["arn:aws:lambda:eu-central-1:336392948345:layer:AWSSDKPandas-Python310:5"]
+  timeout       = 15
   environment {
     variables = {
       S3_BUCKET = aws_s3_bucket.peaks-data-bucket.id
@@ -112,3 +113,4 @@ resource "aws_lambda_permission" "api_gw" {
 
   source_arn = "${aws_apigatewayv2_api.peaks-api.execution_arn}/*/*"
 }
+

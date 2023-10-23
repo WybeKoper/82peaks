@@ -17,6 +17,8 @@ frontend/out/*
 /.pnp
 .pnp.js
 
+scrape_terraform/*.zip
+
 # testing
 /coverage
 

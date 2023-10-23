@@ -16,7 +16,7 @@ const PickDates = () => {
   const fetchMountain = async () => {
     if (!(startDate == null || endDate == null)) {
       const response = await fetch(
-        "api/bestweather" +
+        "https://pnda1qta1f.execute-api.eu-central-1.amazonaws.com/example-stage/bestpeaks" +
           "?" +
           "startDate=" +
           startDate.toISOString().split("T")[0] +
@@ -77,7 +77,7 @@ const PickDates = () => {
                     <div className="">
                       <div className="bg-slate-200">
                         <div>{single_day.day_of_week} </div>
-                        <div>{single_day.date.split("-")[0]} </div>
+                        <div>{single_day.date} </div>
                       </div>
                       <div className="flex items-center justify-center">
                         {single_day.detailed_weather.map((time_period) => (

@@ -1,6 +1,10 @@
 resource "aws_apigatewayv2_api" "peaks-api" {
   name          = "peaks"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["*"]
+    allow_methods = ["GET"]
+  }
 }
 
 resource "aws_apigatewayv2_stage" "example" {

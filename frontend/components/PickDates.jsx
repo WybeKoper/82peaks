@@ -59,9 +59,10 @@ const PickDates = () => {
       <div className="pt-5">
         {mountain.map((mont) => {
           return (
-            <div className="flex">
+            <div key={mont.mountain_name} className="flex items-center justify-center">
+              <div className="flex">
               <div className="flex items-end">
-                <div className="text-sm">Wind km/h</div>
+                <div className="p-1 text-sm">Wind km/h</div>
               </div>
               <div className="bg-slate-300 border-solid border-2 rounded border-gray-800">
                 <div className="flex items-center justify-center p-5">
@@ -72,24 +73,24 @@ const PickDates = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center border justify-center border-1 border-gray-400 divide-x-2 divide-gray-400">
+                <div className="flex items-center justify-center divide-x-2 divide-gray-400">
                   {mont.weather.map((single_day) => (
-                    <div className="">
+                    <div key={single_day.day_of_week} className="">
                       <div className="bg-slate-200">
                         <div>{single_day.day_of_week} </div>
                         <div>{single_day.date} </div>
                       </div>
-                      <div className="flex items-center justify-center">
+                      <div className="flex bg-slate-200">
                         {single_day.detailed_weather.map((time_period) => (
-                          <div>
-                            <div className="p-1 bg-slate-200">
+                          <div className="" key={time_period.time}>
+                            <div className="bg-slate-200">
                               {time_period.time}
                             </div>
-                            <img src={time_period.weather_icon} />
-                            <div className="p-1">
+                            <img className="box-border h-20 w-20" src={time_period.weather_icon} />
+                            <div className="box-border h-16 w-20">
                               {time_period.weather_description}
                             </div>
-                            <div className="p-1">{time_period.wind}</div>
+                            <div className="">{time_period.wind}</div>
                           </div>
                         ))}
                       </div>
@@ -97,6 +98,7 @@ const PickDates = () => {
                   ))}
                 </div>
               </div>
+            </div>
             </div>
           );
         })}

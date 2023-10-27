@@ -3,13 +3,7 @@ import React, { useState }  from 'react';
 
 import Typed from "react-typed"
 import Image from 'next/image';
-import { AiOutlineMail } from 'react-icons/ai';
-import { AiFillInstagram } from 'react-icons/ai';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import PersonalImg from '../public/assets/mountain_7.png';
-import Picker from './Picker';
-import CommentsPage from './Commentloader';
-import Home from './Commentloader';
 import PickDates from './PickDates';
 
 
@@ -29,14 +23,6 @@ const Main = () => {
         <div>
           <PickDates/>
         </div>
-        {/* <div className='flex items-center justify-center'>
-          <div>
-            <Picker className="py-4"/>
-          </div>
-          <div className='pl-5'>
-          <CommentsPage className="py-4"/>
-          </div>
-        </div> */}
         </div>
       </div>
 

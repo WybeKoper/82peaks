@@ -7,11 +7,10 @@ import os
 AWS_S3_BUCKET = os.getenv("S3_BUCKET")
 def lambda_handler(event, context):
     s3_client = boto3.client("s3")
-    AWS_S3_BUCKET = "peaks-bucket-mainly-wanted-swan"
     response = s3_client.get_object(Bucket=AWS_S3_BUCKET, Key="data_all_mountains.csv")
 
-    start_date = "25-10-2023"
-    end_date = "27-10-2023"
+    start_date = event['queryStringParameters']['startDate']
+    end_date = event['queryStringParameters']['endDate']
 
     date_range = list(pandas.date_range(start_date, end_date, freq='d'))
     number_of_days = len(date_range)
@@ -66,7 +65,7 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': json.dumps(json_data)
+            'body': json.dumps([json_data])
         }
 
     else:

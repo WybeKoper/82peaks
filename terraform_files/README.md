@@ -1,6 +1,12 @@
 ## Description
-This folder contains the files required to build a python image which scrapes a mountain weather api. This image is used to scrape weather data from the 82 4000+ meter alpine peaks.
+This folder contains the terraform files used to set up the 82peaks web app. All infrastructure is set up in AWS.
 
-### To build image
+There are three main components:
+1. Frontend infra, these files have the `frontend` prefix
+2. API infra, these files have the `api` prefix
+3. Web Scraper infra, these files have the `web_scraper` prefix.  
 
-`docker build . `
+### To set up these resources in AWS run:
+`terraform init`
+`terraform plan`
+`terraform apply`

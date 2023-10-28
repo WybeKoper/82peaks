@@ -5,8 +5,11 @@ import pandas as pd
 import os
 
 AWS_S3_BUCKET = os.getenv("S3_BUCKET")
+
+
 def lambda_handler(event, context):
     s3_client = boto3.client("s3")
+
     response = s3_client.get_object(Bucket=AWS_S3_BUCKET, Key="data_all_mountains.csv")
 
     start_date = event['queryStringParameters']['startDate']
@@ -47,15 +50,17 @@ def lambda_handler(event, context):
 
         for i in range(0, number_of_days):
             day_data = {}
-            day_data["date"] = day_of_the_month[i*3]
-            day_data["day_of_week"] = day_of_the_week[i*3]
+            day_data['id'] = i
+            day_data["date"] = day_of_the_month[i * 3]
+            day_data["day_of_week"] = day_of_the_week[i * 3]
             time_data = []
             for j in range(0, 3):
                 weather_instance = {}
-                weather_instance['time'] = time_list[i + j]
-                weather_instance['weather_description'] = weather_description[i + j]
-                weather_instance['wind'] = wind[i + j]
-                weather_instance['weather_icon'] = weather_icon_urls[i + j]
+                weather_instance['id'] = j
+                weather_instance['time'] = time_list[i * 3 + j]
+                weather_instance['weather_description'] = weather_description[i * 3 + j]
+                weather_instance['wind'] = wind[i * 3 + j]
+                weather_instance['weather_icon'] = weather_icon_urls[i * 3 + j]
                 time_data.append(weather_instance)
 
             day_data['detailed_weather'] = time_data
@@ -70,7 +75,6 @@ def lambda_handler(event, context):
 
     else:
         print(f"Unsuccessful S3 get_object response. Status - {status}")
-
 
     return {
         'statusCode': 500,

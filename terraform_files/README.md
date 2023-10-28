@@ -7,6 +7,6 @@ There are three main components:
 3. Web Scraper infra, these files have the `web_scraper` prefix.  
 
 ### To set up these resources in AWS run:
-`terraform init`
-`terraform plan`
-`terraform apply`
+1. `terraform init`
+2. `terraform plan`
+3. `terraform apply`
